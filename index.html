@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🎬 ViralReel AI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(circle at top left,#38bdf830,transparent 25%),
+radial-gradient(circle at bottom right,#9333ea30,transparent 25%),
+#020617;
+
+min-height:100vh;
+
+color:white;
+
+padding:20px;
+
+overflow-x:hidden;
+
+}
+
+/* 🌌 HEADER */
+
+header{
+
+text-align:center;
+margin-top:20px;
+
+}
+
+header h1{
+
+font-size:60px;
+color:#38bdf8;
+
+}
+
+header p{
+
+margin-top:10px;
+opacity:0.75;
+
+}
+
+/* 🌟 HERO */
+
+.hero{
+
+margin-top:40px;
+
+text-align:center;
+
+}
+
+.hero h2{
+
+font-size:48px;
+line-height:1.2;
+
+}
+
+.hero span{
+color:#38bdf8;
+}
+
+.hero p{
+
+margin-top:15px;
+opacity:0.8;
+
+}
+
+/* 🧊 GLASS CARD */
+
+.card{
+
+max-width:1000px;
+
+margin:auto;
+margin-top:35px;
+
+background:rgba(255,255,255,0.06);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,0.08);
+
+border-radius:24px;
+
+padding:25px;
+
+box-shadow:
+0 0 40px rgba(56,189,248,0.12);
+
+transition:0.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-4px);
+
+}
+
+/* 📝 INPUT */
+
+input{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+outline:none;
+
+border-radius:14px;
+
+background:#111827;
+
+color:white;
+
+font-size:16px;
+
+margin-top:15px;
+
+}
+
+/* 🚀 BUTTONS */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+margin-top:15px;
+
+}
+
+button{
+
+padding:14px;
+
+border:none;
+
+border-radius:14px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:0.3s;
+
+background:linear-gradient(
+45deg,
+#38bdf8,
+#9333ea
+);
+
+color:white;
+
+font-size:15px;
+
+box-shadow:
+0 0 25px rgba(56,189,248,0.25);
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 0 35px rgba(56,189,248,0.45);
+
+}
+
+/* 📦 OUTPUT */
+
+.output{
+
+margin-top:25px;
+
+background:#111827;
+
+padding:20px;
+
+border-radius:18px;
+
+line-height:1.8;
+
+border-left:4px solid #38bdf8;
+
+min-height:120px;
+
+animation:fade 0.3s ease;
+
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* 📱 MOBILE */
+
+@media(max-width:768px){
+
+header h1{
+font-size:38px;
+}
+
+.hero h2{
+font-size:32px;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🎬 ViralReel AI</h1>
+
+<p>
+AI-powered viral content generator 🚀
+</p>
+
+</header>
+
+<section class="hero">
+
+<h2>
+Create <span>viral reels</span><br>
+in seconds ⚡
+</h2>
+
+<p>
+Hooks • Scripts • Captions • Hashtags
+</p>
+
+</section>
+
+<div class="card">
+
+<h3>🎯 Enter Reel Topic</h3>
+
+<input
+id="topic"
+placeholder="Example: Study Motivation">
+
+<div class="grid">
+
+<button onclick="generateHook()">
+🎣 Generate Hooks
+</button>
+
+<button onclick="generateScript()">
+🎬 Generate Script
+</button>
+
+<button onclick="generateCaption()">
+✍ Generate Caption
+</button>
+
+<button onclick="generateHashtags()">
+🔥 Generate Hashtags
+</button>
+
+</div>
+
+<div class="output" id="output">
+
+Your AI content will appear here 🚀
+
+</div>
+
+</div>
+
+<script>
+
+const API = "https://virulreel.onrender.com/";
+
+/* 🎣 HOOKS */
+
+async function generateHook(){
+
+let topic =
+document.getElementById("topic").value;
+
+output.innerHTML =
+"⚡ Generating viral hooks...";
+
+let res = await fetch(API+"/generate-hook",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+topic:topic
+})
+
+});
+
+let data = await res.json();
+
+output.innerHTML =
+marked.parse(data.hooks || "No response");
+
+}
+
+/* 🎬 SCRIPT */
+
+async function generateScript(){
+
+let topic =
+document.getElementById("topic").value;
+
+output.innerHTML =
+"⚡ Generating script...";
+
+let res = await fetch(API+"/generate-script",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+topic:topic
+})
+
+});
+
+let data = await res.json();
+
+output.innerHTML =
+marked.parse(data.script || "No response");
+
+}
+
+/* ✍ CAPTION */
+
+async function generateCaption(){
+
+let topic =
+document.getElementById("topic").value;
+
+output.innerHTML =
+"⚡ Generating captions...";
+
+let res = await fetch(API+"/generate-caption",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+topic:topic
+})
+
+});
+
+let data = await res.json();
+
+output.innerHTML =
+marked.parse(data.caption || "No response");
+
+}
+
+/* 🔥 HASHTAGS */
+
+async function generateHashtags(){
+
+let topic =
+document.getElementById("topic").value;
+
+output.innerHTML =
+"⚡ Generating hashtags...";
+
+let res = await fetch(API+"/generate-hashtags",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+topic:topic
+})
+
+});
+
+let data = await res.json();
+
+output.innerHTML =
+marked.parse(data.hashtags || "No response");
+
+}
+
+</script>
+
+</body>
+</html>
