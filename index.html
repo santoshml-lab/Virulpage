@@ -25,6 +25,19 @@ color:white;
 padding:20px;
 }
 
+/* AUDIO BAR */
+.audio-box{
+text-align:center;
+margin-top:10px;
+}
+
+audio{
+width:100%;
+max-width:400px;
+margin-top:10px;
+}
+
+/* HEADER */
 header{
 text-align:center;
 padding:20px;
@@ -128,6 +141,16 @@ header h1{font-size:34px;}
 <p>One click → Viral content engine 🚀</p>
 </header>
 
+<!-- 🎵 BACKGROUND MUSIC -->
+<div class="audio-box">
+<p>🎵 Sigma Tech Background Music</p>
+
+<audio controls autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b3d3d0c3.mp3?filename=cyberpunk-synthwave-ambient-11049.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
 <div class="card">
 
 <input id="topic" placeholder="Enter topic (e.g. Study Motivation)">
@@ -215,7 +238,7 @@ localStorage.setItem("viral_history", text);
 document.getElementById("history").innerText = "✅ Saved!";
 }
 
-/* LOAD HISTORY */
+/* LOAD */
 window.onload = function(){
 let data = localStorage.getItem("viral_history");
 if(data){
@@ -227,3 +250,5 @@ document.getElementById("history").innerText = data;
 
 </body>
 </html>
+
+
